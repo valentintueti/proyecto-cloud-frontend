@@ -18,8 +18,13 @@ import react from '@vitejs/plugin-react';
 //
 // Activo temporalmente para la prueba de integracion local del avance
 // (MS1 en Docker en localhost:8081, MS2 en localhost:8001, MS3 en
+<<<<<<< HEAD
 // localhost:3000, MS4 en localhost:8002, MS5 en localhost:8003; MS1-MS4 sin
 // CORS configurado en el backend, MS5 si tiene CORS abierto).
+=======
+// localhost:3000, MS4 en localhost:8002, sin CORS configurado en ninguno
+// de los cuatro backends).
+>>>>>>> f217a99b47549db3517912396cfc7a423b1fca18
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -44,11 +49,14 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api\/ms4/, ''),
       },
+<<<<<<< HEAD
       '/api/ms5': {
         target: 'http://localhost:8003',
         changeOrigin: true,
         rewrite: (p) => p.replace(/^\/api\/ms5/, ''),
       },
+=======
+>>>>>>> f217a99b47549db3517912396cfc7a423b1fca18
     },
   },
   build: {

@@ -1,5 +1,6 @@
 export type MsKey = 'ms1' | 'ms2' | 'ms3' | 'ms4' | 'ms5';
 
+
 interface MsConfig {
   key: MsKey;
   label: string;

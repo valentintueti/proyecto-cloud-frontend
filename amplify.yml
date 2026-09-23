@@ -13,6 +13,7 @@
 # publicas HTTPS de cada API Gateway. Un cambio de valor exige un nuevo
 # build (Redeploy) para tomar efecto, porque Vite las incrusta en tiempo de
 # compilacion.
+
 version: 1
 frontend:
   phases:
