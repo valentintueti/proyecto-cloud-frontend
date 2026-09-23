@@ -21,9 +21,6 @@ interface Consulta {
   fetch: () => Promise<Fila[]>;
 }
 
-// Las 5 consultas se integran tal cual están definidas en
-// proyecto-cloud-ms5/api/app/queries.py: cada `key` de columna es el alias
-// exacto del SELECT de Athena, no un nombre inventado para la interfaz.
 const CONSULTAS: Consulta[] = [
   {
     key: 'demanda-ruta',

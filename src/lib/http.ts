@@ -25,14 +25,6 @@ function buildUrl(base: string, path: string, query?: Record<string, QueryValue>
   return url;
 }
 
-/**
- * Interpreta el cuerpo de error devuelto por cualquiera de los 4 backends:
- * - MS1 (Spring): {detail} para NotFound/Validation propias, o un mapa plano
- *   {campo: mensaje} cuando falla Bean Validation (@Valid).
- * - MS2/MS4 (FastAPI): {detail: string} para excepciones propias, o
- *   {detail: [{loc, msg, type}, ...]} para errores 422 de Pydantic.
- * - MS3 (Express): {detail: string} tanto para Joi como para errores propios.
- */
 function parseErrorBody(body: unknown, status: number): { message: string; fieldErrors?: Record<string, string> } {
   if (body && typeof body === 'object') {
     const record = body as Record<string, unknown>;

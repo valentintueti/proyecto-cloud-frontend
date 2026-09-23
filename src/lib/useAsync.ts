@@ -6,12 +6,6 @@ interface AsyncState<T> {
   error: unknown;
 }
 
-/**
- * Ejecuta `fetcher` cuando cambian las dependencias y expone data/loading/error
- * junto con `reload` para reintentar manualmente. Ignora respuestas de
- * ejecuciones obsoletas (por ejemplo, si el usuario cambia de pasajero antes
- * de que responda la petición anterior).
- */
 export function useAsync<T>(fetcher: () => Promise<T>, deps: unknown[]): AsyncState<T> & { reload: () => void } {
   const [state, setState] = useState<AsyncState<T>>({ data: undefined, loading: true, error: undefined });
   const requestId = useRef(0);
@@ -27,12 +21,10 @@ export function useAsync<T>(fetcher: () => Promise<T>, deps: unknown[]): AsyncSt
         if (requestId.current === id) setState((prev) => ({ ...prev, loading: false, error }));
       },
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   useEffect(() => {
     run();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
 
   return { ...state, reload: run };

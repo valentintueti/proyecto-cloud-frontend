@@ -1,9 +1,5 @@
 export type ApiErrorKind = 'not_configured' | 'network' | 'http' | 'parse';
 
-/**
- * Error normalizado para toda la app. `fieldErrors` solo se llena cuando el
- * backend devuelve un mapa de validacion por campo (MS1 / Bean Validation).
- */
 export class ApiError extends Error {
   kind: ApiErrorKind;
   status?: number;
@@ -22,7 +18,6 @@ export function isApiError(err: unknown): err is ApiError {
   return err instanceof ApiError;
 }
 
-/** Mensaje corto y legible para mostrar en la interfaz. */
 export function describeError(err: unknown): string {
   if (isApiError(err)) {
     return err.message;

@@ -15,8 +15,6 @@ export function HistorialPage() {
     [numericId],
   );
 
-  // Segundo endpoint real de MS4 (GET /historial/{id}/resumen): trae
-  // estadísticas ya agregadas por el propio backend, no calculadas aquí.
   const resumen = useAsync(
     () => (numericId ? historialApi.resumen(numericId) : Promise.resolve<Resumen | undefined>(undefined)),
     [numericId],
@@ -54,7 +52,6 @@ export function HistorialPage() {
                     </div>
                   </dl>
 
-                  {/* Segundo endpoint real de MS4: GET /historial/{id}/resumen */}
                   {resumen.data && (
                     <dl className="detail-grid" style={{ marginBottom: 16 }}>
                       <div>

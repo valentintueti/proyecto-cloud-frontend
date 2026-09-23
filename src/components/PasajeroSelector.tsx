@@ -10,11 +10,6 @@ interface Props {
   label?: string;
 }
 
-/**
- * Selector de pasajero reutilizado por Viajes, Conexiones e Historial: esos
- * módulos (MS3/MS4) exigen elegir un pasajero de MS1 antes de listar nada,
- * porque no existen endpoints de listado global en esos backends.
- */
 export function PasajeroSelector({ value, onChange, label = 'Pasajero' }: Props) {
   const { data, loading, error, reload } = useAsync(() => pasajerosApi.listar(), []);
 

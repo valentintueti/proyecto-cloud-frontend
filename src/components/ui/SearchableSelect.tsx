@@ -11,7 +11,6 @@ interface Props<T> {
   disabled?: boolean;
 }
 
-/** Select nativo con un filtro de texto por encima para buscar en el cliente sobre datos ya cargados. */
 export function SearchableSelect<T>({ id, items, value, onChange, getId, getLabel, placeholder = 'Selecciona…', disabled }: Props<T>) {
   const [query, setQuery] = useState('');
 
