@@ -1,0 +1,31 @@
+# Configuracion de build para AWS Amplify Hosting (solo frontend estatico).
+# Referencia oficial: https://docs.aws.amazon.com/amplify/latest/userguide/yml-specification-syntax.html
+#
+# Este archivo asume que "proyecto-cloud-frontend" es la RAIZ del repositorio
+# que se conecta a Amplify. Si el repositorio raiz contiene otras carpetas
+# (monorepo), hay que configurar en la consola de Amplify el "app root" /
+# "package path" apuntando a esta carpeta, o mover este amplify.yml a la raiz
+# real del repo conectado.
+#
+# Antes de construir, definir en la consola de Amplify (App settings > Environment
+# variables) las 5 variables VITE_MS1_BASE_URL, VITE_MS2_BASE_URL,
+# VITE_MS3_BASE_URL, VITE_MS4_BASE_URL y VITE_MS5_BASE_URL con las URLs
+# publicas HTTPS de cada API Gateway. Un cambio de valor exige un nuevo
+# build (Redeploy) para tomar efecto, porque Vite las incrusta en tiempo de
+# compilacion.
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    baseDirectory: dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
