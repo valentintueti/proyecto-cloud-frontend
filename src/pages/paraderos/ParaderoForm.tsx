@@ -44,7 +44,7 @@ export function ParaderoForm({ submitting, serverErrors, onSubmit, onCancel }: P
           <input id="lng" type="number" step="any" value={lng} onChange={(e) => setLng(e.target.value)} disabled={submitting} />
         </Field>
       </div>
-      <p className="hint">MS2 no expone edición ni eliminación de paraderos; solo alta y consulta.</p>
+      <p className="hint">Los paraderos solo admiten alta y consulta.</p>
       <div className="form-actions">
         <Button type="button" variant="secondary" onClick={onCancel} disabled={submitting}>
           Cancelar

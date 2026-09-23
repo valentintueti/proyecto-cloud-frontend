@@ -6,7 +6,6 @@ import type {
   RutaInput,
   Servicio,
   ServicioInput,
-  ValidaConexionResponse,
 } from '../types/ms2';
 
 export const rutasApi = {
@@ -23,10 +22,6 @@ export const paraderosApi = {
   obtener: (id: string) => request<Paradero>('ms2', `/paraderos/${id}`),
   batch: (ids: string[]) => request<Paradero[]>('ms2', '/paraderos/batch', { query: { ids: ids.join(',') } }),
   crear: (input: ParaderoInput) => request<Paradero>('ms2', '/paraderos/', { method: 'POST', body: input }),
-  validaConexion: (paraderoId: string, rutaId: string) =>
-    request<ValidaConexionResponse>('ms2', `/paraderos/${paraderoId}/valida-conexion`, {
-      query: { ruta_id: rutaId },
-    }),
 };
 
 export const serviciosApi = {

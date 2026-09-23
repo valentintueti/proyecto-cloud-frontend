@@ -16,7 +16,6 @@ interface Columna {
 interface Consulta {
   key: string;
   label: string;
-  endpoint: string;
   columnas: Columna[];
   fetch: () => Promise<Fila[]>;
 }
@@ -25,7 +24,6 @@ const CONSULTAS: Consulta[] = [
   {
     key: 'demanda-ruta',
     label: 'Demanda por ruta',
-    endpoint: 'GET /analitica/demanda-por-ruta',
     columnas: [
       { key: 'ruta_nombre', label: 'Ruta' },
       { key: 'ruta_sentido', label: 'Sentido' },
@@ -36,7 +34,6 @@ const CONSULTAS: Consulta[] = [
   {
     key: 'demanda-paradero',
     label: 'Demanda por paradero',
-    endpoint: 'GET /analitica/demanda-por-paradero',
     columnas: [
       { key: 'paradero_origen', label: 'Paradero de origen' },
       { key: 'total_viajes', label: 'Total de viajes', numeric: true },
@@ -46,7 +43,6 @@ const CONSULTAS: Consulta[] = [
   {
     key: 'evolucion-mensual',
     label: 'Evolución mensual',
-    endpoint: 'GET /analitica/evolucion-mensual',
     columnas: [
       { key: 'mes', label: 'Mes' },
       { key: 'ruta_nombre', label: 'Ruta' },
@@ -57,7 +53,6 @@ const CONSULTAS: Consulta[] = [
   {
     key: 'paraderos-perfil',
     label: 'Paraderos por perfil de pasajero',
-    endpoint: 'GET /analitica/paraderos-por-perfil',
     columnas: [
       { key: 'paradero_origen', label: 'Paradero de origen' },
       { key: 'distrito', label: 'Distrito' },
@@ -69,7 +64,6 @@ const CONSULTAS: Consulta[] = [
   {
     key: 'ingresos-ruta',
     label: 'Ingresos por ruta',
-    endpoint: 'GET /analitica/ingresos-por-ruta',
     columnas: [
       { key: 'ruta_nombre', label: 'Ruta' },
       { key: 'mes', label: 'Mes' },
@@ -97,9 +91,7 @@ export function AnaliticaPage() {
   return (
     <div>
       <PageHeader
-        title="Analítica"
-        description="Consultas del API analítico de MS5 (proyecto-cloud-ms5), que ejecuta queries de solo lectura contra Athena sobre los datos ingeridos de MS1, MS2 y MS3. No tiene base de datos propia."
-      />
+        title="Análisis de datos" />
 
       <div className="card">
         <div className="card-section">
@@ -118,9 +110,6 @@ export function AnaliticaPage() {
               </select>
             </Field>
           </div>
-          <p className="hint" style={{ marginTop: 8 }}>
-            {consulta.endpoint}
-          </p>
         </div>
         <div className="card-section">
           <AsyncBoundary
@@ -129,7 +118,7 @@ export function AnaliticaPage() {
             onRetry={reload}
             isEmpty={!!data && data.length === 0}
             emptyTitle="Sin resultados"
-            emptyDescription="Athena no devolvió filas para esta consulta con los datos ingeridos actuales."
+            emptyDescription="No hay datos para esta consulta."
           >
             <div className="table-wrap">
               <table className="data-table">

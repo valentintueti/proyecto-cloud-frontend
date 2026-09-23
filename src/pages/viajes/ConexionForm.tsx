@@ -5,10 +5,10 @@ import { Field } from '../../components/ui/Field';
 import { SearchableSelect } from '../../components/ui/SearchableSelect';
 import { describeError } from '../../lib/errors';
 import { useAsync } from '../../lib/useAsync';
-import type { Viaje } from '../../types/ms3';
-import type { ConexionInput } from '../../types/ms3';
+import type { ConexionInput, Viaje } from '../../types/ms3';
 
 interface Props {
+  origen: Viaje;
   viajesDisponibles: Viaje[];
   submitting: boolean;
   serverErrors?: Record<string, string>;
@@ -16,50 +16,40 @@ interface Props {
   onCancel: () => void;
 }
 
-export function ConexionForm({ viajesDisponibles, submitting, serverErrors, onSubmit, onCancel }: Props) {
+export function ConexionForm({ origen, viajesDisponibles, submitting, serverErrors, onSubmit, onCancel }: Props) {
   const paraderos = useAsync(() => paraderosApi.listar(), []);
-  const [origenId, setOrigenId] = useState('');
   const [destinoId, setDestinoId] = useState('');
-  const [paraderoId, setParaderoId] = useState('');
+  const [paraderoId, setParaderoId] = useState(origen.paradero_final_id ?? '');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   function handleSubmit(evt: React.FormEvent) {
     evt.preventDefault();
     const e: Record<string, string> = {};
-    if (!origenId) e.viaje_origen_id = 'Selecciona el viaje de origen.';
     if (!destinoId) e.viaje_destino_id = 'Selecciona el viaje de destino.';
-    if (origenId && destinoId && origenId === destinoId) e.viaje_destino_id = 'Debe ser distinto del viaje de origen.';
     if (!paraderoId) e.paradero_id = 'Selecciona el paradero de conexión.';
     setErrors(e);
     if (Object.keys(e).length > 0) return;
-    onSubmit({ viaje_origen_id: Number(origenId), viaje_destino_id: Number(destinoId), paradero_id: paraderoId });
+    onSubmit({ viaje_origen_id: origen.id, viaje_destino_id: Number(destinoId), paradero_id: paraderoId });
   }
 
   const fieldError = (name: string) => errors[name] ?? serverErrors?.[name];
-  const viajeLabel = (v: Viaje) => `#${v.id} · ${v.servicio_id} · final: ${v.paradero_final_id ?? 'sin finalizar'}`;
+  const viajeLabel = (v: Viaje) => `#${v.id} · ${v.servicio_id} · ${new Date(v.fecha_hora).toLocaleString()}`;
+  const destinos = viajesDisponibles.filter((v) => v.id !== origen.id);
 
   return (
     <form onSubmit={handleSubmit} noValidate>
       <p className="hint" style={{ marginTop: 0 }}>
-        Las opciones muestran los viajes ya cargados del pasajero seleccionado. El backend valida que el viaje de
-        origen haya finalizado en el paradero elegido y que la ruta del servicio de destino pase por ese paradero.
+        El viaje de origen debe haber finalizado en el paradero de conexión y la ruta del viaje de destino debe pasar
+        por ese paradero.
       </p>
       <div className="stack">
         <Field label="Viaje de origen" htmlFor="viaje-origen" error={fieldError('viaje_origen_id')}>
-          <SearchableSelect
-            id="viaje-origen"
-            items={viajesDisponibles}
-            value={origenId}
-            onChange={setOrigenId}
-            getId={(v) => String(v.id)}
-            getLabel={viajeLabel}
-            disabled={submitting}
-          />
+          <input id="viaje-origen" value={viajeLabel(origen)} disabled />
         </Field>
         <Field label="Viaje de destino" htmlFor="viaje-destino" error={fieldError('viaje_destino_id')}>
           <SearchableSelect
             id="viaje-destino"
-            items={viajesDisponibles}
+            items={destinos}
             value={destinoId}
             onChange={setDestinoId}
             getId={(v) => String(v.id)}

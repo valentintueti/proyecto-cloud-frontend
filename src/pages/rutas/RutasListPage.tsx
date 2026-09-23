@@ -76,7 +76,7 @@ export function RutasListPage() {
     <div>
       <PageHeader
         title="Rutas"
-        description="Rutas del sistema de transporte (metropolitano y corredores) consumidas desde MS2."
+        description="Rutas del sistema de transporte (metropolitano y corredores)."
         actions={
           <Button variant="primary" onClick={() => setCreating(true)}>
             + Nueva ruta

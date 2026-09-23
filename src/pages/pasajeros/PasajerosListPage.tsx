@@ -37,7 +37,7 @@ export function PasajerosListPage() {
     <div>
       <PageHeader
         title="Pasajeros"
-        description="Alta y consulta de pasajeros registrados en MS1. Cada pasajero puede tener varias tarjetas asociadas."
+        description="Alta y consulta de pasajeros registrados. Cada pasajero puede tener varias tarjetas asociadas."
         actions={
           <Button variant="primary" onClick={() => setCreating(true)}>
             + Nuevo pasajero

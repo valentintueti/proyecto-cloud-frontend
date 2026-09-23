@@ -6,7 +6,6 @@ import { RutasListPage } from './pages/rutas/RutasListPage';
 import { ParaderosListPage } from './pages/paraderos/ParaderosListPage';
 import { ServiciosListPage } from './pages/servicios/ServiciosListPage';
 import { ViajesListPage } from './pages/viajes/ViajesListPage';
-import { ConexionesListPage } from './pages/conexiones/ConexionesListPage';
 import { HistorialPage } from './pages/historial/HistorialPage';
 import { AnaliticaPage } from './pages/analitica/AnaliticaPage';
 
@@ -22,7 +21,7 @@ export const router = createBrowserRouter([
       { path: 'paraderos', element: <ParaderosListPage /> },
       { path: 'servicios', element: <ServiciosListPage /> },
       { path: 'viajes', element: <ViajesListPage /> },
-      { path: 'conexiones', element: <ConexionesListPage /> },
+      { path: 'conexiones', element: <Navigate to="/viajes" replace /> },
       { path: 'historial', element: <HistorialPage /> },
       { path: 'analitica', element: <AnaliticaPage /> },
       { path: '*', element: <Navigate to="/pasajeros" replace /> },

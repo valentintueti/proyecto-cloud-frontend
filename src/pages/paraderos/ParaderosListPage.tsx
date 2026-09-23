@@ -6,9 +6,8 @@ import { Modal } from '../../components/ui/Modal';
 import { PageHeader } from '../../components/ui/PageHeader';
 import { ApiError, describeError } from '../../lib/errors';
 import { useAsync } from '../../lib/useAsync';
-import type { Paradero, ParaderoInput } from '../../types/ms2';
+import type { ParaderoInput } from '../../types/ms2';
 import { ParaderoForm } from './ParaderoForm';
-import { ValidaConexionModal } from './ValidaConexionModal';
 
 export function ParaderosListPage() {
   const { data, loading, error, reload } = useAsync(() => paraderosApi.listar(), []);
@@ -17,7 +16,6 @@ export function ParaderosListPage() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>();
-  const [validating, setValidating] = useState<Paradero | null>(null);
 
   async function handleCreate(input: ParaderoInput) {
     setSubmitting(true);
@@ -39,7 +37,7 @@ export function ParaderosListPage() {
     <div>
       <PageHeader
         title="Paraderos"
-        description="Paraderos registrados en MS2. Solo admiten alta y consulta: no hay edición ni eliminación en el backend actual."
+        description="Paraderos registrados. Solo admiten alta y consulta."
         actions={
           <Button variant="primary" onClick={() => setCreating(true)}>
             + Nuevo paradero
@@ -65,7 +63,6 @@ export function ParaderosListPage() {
                     <th>Nombre</th>
                     <th>Ubicación (lat, lng)</th>
                     <th>Rutas asociadas</th>
-                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -77,11 +74,6 @@ export function ParaderosListPage() {
                         {p.ubicacion.lat}, {p.ubicacion.lng}
                       </td>
                       <td>{p.rutas.length > 0 ? p.rutas.map((r) => r.nombre).join(', ') : '—'}</td>
-                      <td className="row-actions">
-                        <Button size="sm" variant="secondary" onClick={() => setValidating(p)}>
-                          Validar conexión
-                        </Button>
-                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -97,8 +89,6 @@ export function ParaderosListPage() {
           <ParaderoForm submitting={submitting} serverErrors={fieldErrors} onSubmit={handleCreate} onCancel={() => setCreating(false)} />
         </Modal>
       )}
-
-      {validating && <ValidaConexionModal paradero={validating} onClose={() => setValidating(null)} />}
     </div>
   );
 }

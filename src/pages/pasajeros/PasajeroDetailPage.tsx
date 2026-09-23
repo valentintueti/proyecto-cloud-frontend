@@ -160,7 +160,7 @@ export function PasajeroDetailPage() {
           <div className="page-header" style={{ marginBottom: 12 }}>
             <div>
               <h1 style={{ fontSize: '1.05rem' }}>Tarjetas del pasajero</h1>
-              <p>Cada tarjeta tiene un saldo independiente. No existe un listado global de tarjetas en MS1.</p>
+              <p>Cada tarjeta tiene un saldo independiente.</p>
             </div>
             <div className="page-header-actions">
               <Button variant="primary" onClick={() => setCreatingTarjeta(true)}>

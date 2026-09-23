@@ -74,9 +74,3 @@ export interface ServicioInput {
   hora_fin: string;
   paraderos: ParaderoOrden[];
 }
-
-export interface ValidaConexionResponse {
-  paradero_id: string;
-  ruta_id: string;
-  es_valida: boolean;
-}

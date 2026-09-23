@@ -24,7 +24,6 @@ export function HistorialPage() {
     <div>
       <PageHeader
         title="Historial de viajes"
-        description="MS4 agrega datos de MS1 (pasajero), MS2 (ruta/servicio) y MS3 (viajes). Si alguna de esas dependencias falla, esta pantalla muestra un error recuperable sin afectar al resto de la aplicación."
       />
 
       <div className="card">
@@ -35,7 +34,7 @@ export function HistorialPage() {
           {!numericId ? (
             <div className="state-box">
               <h3>Selecciona un pasajero</h3>
-              <p>Elige un pasajero para consultar su historial (GET /historial/{'{'}pasajero_id{'}'}).</p>
+              <p>Elige un pasajero para consultar su historial.</p>
             </div>
           ) : (
             <AsyncBoundary loading={loading} error={error} onRetry={reload}>
@@ -76,7 +75,7 @@ export function HistorialPage() {
                   {data.viajes.length === 0 ? (
                     <div className="state-box">
                       <h3>Sin viajes registrados</h3>
-                      <p>Este pasajero todavía no tiene viajes en el historial agregado por MS4.</p>
+                      <p>Este pasajero todavía no tiene viajes en el historial.</p>
                     </div>
                   ) : (
                     <div className="table-wrap">
