@@ -62,15 +62,13 @@ const CONSULTAS: Consulta[] = [
     fetch: () => analiticaApi.paraderosPorPerfil() as unknown as Promise<Fila[]>,
   },
   {
-    key: 'ingresos-ruta',
-    label: 'Ingresos por ruta',
+    key: 'trasbordos-ruta-destino',
+    label: 'Rutas que más reciben trasbordos',
     columnas: [
-      { key: 'ruta_nombre', label: 'Ruta' },
-      { key: 'mes', label: 'Mes' },
-      { key: 'ingreso_total', label: 'Ingreso total (S/)', numeric: true },
-      { key: 'total_pagos', label: 'Total de pagos', numeric: true },
+      { key: 'ruta_destino', label: 'Ruta de destino' },
+      { key: 'total_conexiones', label: 'Total de trasbordos', numeric: true },
     ],
-    fetch: () => analiticaApi.ingresosPorRuta() as unknown as Promise<Fila[]>,
+    fetch: () => analiticaApi.trasbordosPorRutaDestino() as unknown as Promise<Fila[]>,
   },
 ];
 

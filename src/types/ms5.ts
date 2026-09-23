@@ -22,9 +22,7 @@ export interface ParaderoPorPerfil {
   total_visitas: number;
 }
 
-export interface IngresoPorRuta {
-  ruta_nombre: string;
-  mes: string;
-  ingreso_total: number;
-  total_pagos: number;
+export interface TrasbordoPorRutaDestino {
+  ruta_destino: string;
+  total_conexiones: number;
 }

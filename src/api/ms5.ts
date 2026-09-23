@@ -3,8 +3,8 @@ import type {
   DemandaPorRuta,
   DemandaPorParadero,
   EvolucionMensual,
-  IngresoPorRuta,
   ParaderoPorPerfil,
+  TrasbordoPorRutaDestino,
 } from '../types/ms5';
 
 export const analiticaApi = {
@@ -12,5 +12,6 @@ export const analiticaApi = {
   demandaPorParadero: () => request<DemandaPorParadero[]>('ms5', '/analitica/demanda-por-paradero'),
   evolucionMensual: () => request<EvolucionMensual[]>('ms5', '/analitica/evolucion-mensual'),
   paraderosPorPerfil: () => request<ParaderoPorPerfil[]>('ms5', '/analitica/paraderos-por-perfil'),
-  ingresosPorRuta: () => request<IngresoPorRuta[]>('ms5', '/analitica/ingresos-por-ruta'),
+  trasbordosPorRutaDestino: () =>
+    request<TrasbordoPorRutaDestino[]>('ms5', '/analitica/trasbordos-por-ruta-destino'),
 };
