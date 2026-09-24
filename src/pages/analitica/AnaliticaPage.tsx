@@ -51,62 +51,6 @@ const CONSULTAS: Consulta[] = [
     fetch: () => analiticaApi.demandaPorHora() as unknown as Promise<Fila[]>,
   },
   {
-    key: 'evolucion-mensual',
-    label: 'Evolución mensual',
-    columnas: [
-      { key: 'mes', label: 'Mes' },
-      { key: 'ruta_nombre', label: 'Ruta' },
-      { key: 'total_viajes', label: 'Total de viajes', numeric: true },
-    ],
-    fetch: () => analiticaApi.evolucionMensual() as unknown as Promise<Fila[]>,
-  },
-  {
-    key: 'paraderos-perfil',
-    label: 'Paraderos por perfil de pasajero',
-    columnas: [
-      { key: 'paradero_origen', label: 'Paradero de origen' },
-      { key: 'distrito', label: 'Distrito' },
-      { key: 'rango_edad', label: 'Rango de edad' },
-      { key: 'total_visitas', label: 'Total de visitas', numeric: true },
-    ],
-    fetch: () => analiticaApi.paraderosPorPerfil() as unknown as Promise<Fila[]>,
-  },
-  {
-    key: 'concentracion-pasajeros',
-    label: 'Concentración de pasajeros (Pareto)',
-    columnas: [
-      { key: 'pasajero_id', label: 'Pasajero' },
-      { key: 'distrito', label: 'Distrito' },
-      { key: 'total_viajes', label: 'Total de viajes', numeric: true },
-      { key: 'pct_pasajeros_acumulado', label: '% pasajeros acumulado', numeric: true },
-      { key: 'pct_viajes_acumulado', label: '% viajes acumulado', numeric: true },
-    ],
-    fetch: () => analiticaApi.concentracionPasajeros() as unknown as Promise<Fila[]>,
-  },
-  {
-    key: 'saldo-flotante',
-    label: 'Saldo flotante en tarjetas',
-    columnas: [
-      { key: 'tipo', label: 'Tipo de tarjeta' },
-      { key: 'distrito', label: 'Distrito' },
-      { key: 'total_tarjetas', label: 'Total de tarjetas', numeric: true },
-      { key: 'saldo_flotante_total', label: 'Saldo flotante (S/)', numeric: true },
-    ],
-    fetch: () => analiticaApi.saldoFlotante() as unknown as Promise<Fila[]>,
-  },
-  {
-    key: 'viajes-fuera-horario',
-    label: 'Viajes fuera del horario del servicio',
-    columnas: [
-      { key: 'viaje_id', label: 'Viaje' },
-      { key: 'fecha_hora', label: 'Fecha/hora' },
-      { key: 'ruta_nombre', label: 'Ruta' },
-      { key: 'hora_inicio', label: 'Inicio del servicio' },
-      { key: 'hora_fin', label: 'Fin del servicio' },
-    ],
-    fetch: () => analiticaApi.viajesFueraHorario() as unknown as Promise<Fila[]>,
-  },
-  {
     key: 'trasbordos-ruta-destino',
     label: 'Rutas que más reciben trasbordos',
     columnas: [
